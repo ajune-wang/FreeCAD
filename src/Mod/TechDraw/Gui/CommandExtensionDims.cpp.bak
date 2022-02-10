@@ -144,8 +144,8 @@ CmdTechDrawExtensionInsertDiameter::CmdTechDrawExtensionInsertDiameter()
 {
     sAppModule      = "TechDraw";
     sGroup          = QT_TR_NOOP("TechDraw");
-    sMenuText       = QT_TR_NOOP("Insert '¦Õ' Prefix");
-    sToolTipText    = QT_TR_NOOP("Insert a '¦Õ' symbol at the beginning of the dimension text:<br>\
+    sMenuText       = QT_TR_NOOP("Insert 'âŒ€' Prefix");
+    sToolTipText    = QT_TR_NOOP("Insert a 'âŒ€' symbol at the beginning of the dimension text:<br>\
 - Select one or more dimensions<br>\
 - Click this tool");
     sWhatsThis      = "TechDraw_ExtensionInsertDiameter";
@@ -156,7 +156,7 @@ CmdTechDrawExtensionInsertDiameter::CmdTechDrawExtensionInsertDiameter()
 void CmdTechDrawExtensionInsertDiameter::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    execInsertPrefixChar(this, "¦Õ");   
+    execInsertPrefixChar(this, "âŒ€");   
 }
 
 bool CmdTechDrawExtensionInsertDiameter::isActive(void)
@@ -177,8 +177,8 @@ CmdTechDrawExtensionInsertSquare::CmdTechDrawExtensionInsertSquare()
 {
     sAppModule      = "TechDraw";
     sGroup          = QT_TR_NOOP("TechDraw");
-    sMenuText       = QT_TR_NOOP("Insert '¡õ' Prefix");
-    sToolTipText    = QT_TR_NOOP("Insert a '¡õ' symbol at the beginning of the dimension text:<br>\
+    sMenuText       = QT_TR_NOOP("Insert 'ã€¼' Prefix");
+    sToolTipText    = QT_TR_NOOP("Insert a 'ã€¼' symbol at the beginning of the dimension text:<br>\
 - Select one or more dimensions<br>\
 - Click this tool");
     sWhatsThis      = "TechDraw_ExtensionInsertSquare";
@@ -189,7 +189,7 @@ CmdTechDrawExtensionInsertSquare::CmdTechDrawExtensionInsertSquare()
 void CmdTechDrawExtensionInsertSquare::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    execInsertPrefixChar(this, "'¡õ'");
+    execInsertPrefixChar(this, "'ã€¼'");
 }
 
 bool CmdTechDrawExtensionInsertSquare::isActive(void)
@@ -266,8 +266,8 @@ CmdTechDrawExtensionInsertPrefixGroup::CmdTechDrawExtensionInsertPrefixGroup()
 {
     sAppModule      = "TechDraw";
     sGroup          = QT_TR_NOOP("TechDraw");
-    sMenuText       = QT_TR_NOOP("Insert '¦Õ' Prefix");
-    sToolTipText    = QT_TR_NOOP("Insert a '¦Õ' symbol at the beginning of the dimension text:<br>\
+    sMenuText       = QT_TR_NOOP("Insert 'âŒ€' Prefix");
+    sToolTipText    = QT_TR_NOOP("Insert a 'âŒ€' symbol at the beginning of the dimension text:<br>\
 - Select one or more dimensions<br>\
 - Click this tool");
     sWhatsThis      = "TechDraw_ExtensionInsertPrefixGroup";
@@ -287,11 +287,11 @@ void CmdTechDrawExtensionInsertPrefixGroup::activated(int iMsg)
     Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
     pcAction->setIcon(pcAction->actions().at(iMsg)->icon());
     switch (iMsg) {
-    case 0:                 //insert "?" as prefix
-        execInsertPrefixChar(this, "¦Õ");
+    case 0:                 //insert "âŒ€" as prefix
+        execInsertPrefixChar(this, "âŒ€");
         break;
-    case 1:                 //insert "?" as prefix
-        execInsertPrefixChar(this, "¡õ");
+    case 1:                 //insert "ã€¼" as prefix
+        execInsertPrefixChar(this, R"(ã€¼)");
         break;
     case 2:                 //remove prefix characters
         execRemovePrefixChar(this);
@@ -340,16 +340,16 @@ void CmdTechDrawExtensionInsertPrefixGroup::languageChange()
     QList<QAction*> a = pcAction->actions();
 
     QAction* arc1 = a[0];
-    arc1->setText(QApplication::translate("CmdTechDrawExtensionInsertDiameter", "Insert '?' Prefix"));
+    arc1->setText(QApplication::translate("CmdTechDrawExtensionInsertDiameter", "Insert 'âŒ€' Prefix"));
     arc1->setToolTip(QApplication::translate("CmdTechDrawExtensionInsertDiameter",
-"Insert a '¦Õ' symbol at the beginning of the dimension text:<br>\
+"Insert a 'âŒ€' symbol at the beginning of the dimension text:<br>\
 - Select one or more dimensions<br>\
 - Click this tool"));
     arc1->setStatusTip(arc1->text());
     QAction* arc2 = a[1];
-    arc2->setText(QApplication::translate("CmdTechDrawExtensionInsertSquare", "Insert '?' Prefix"));
+    arc2->setText(QApplication::translate("CmdTechDrawExtensionInsertSquare", "Insert 'ã€¼' Prefix"));
     arc2->setToolTip(QApplication::translate("CmdTechDrawExtensionInsertSquare",
-"Insert a '¡õ' symbol at the beginning of the dimension text:<br>\
+"Insert a 'ã€¼' symbol at the beginning of the dimension text:<br>\
 - Select one or more dimensions<br>\
 - Click this tool"));
     arc2->setStatusTip(arc2->text());
@@ -1931,7 +1931,7 @@ void execCreateHorizChamferDimension(Gui::Command* cmd) {
             float alpha = round(abs(atan(dy / dx)) * Pi180);
             std::string sAlpha = std::to_string((int)alpha);
             std::string formatSpec = dim->FormatSpec.getStrValue();
-            formatSpec = formatSpec + "x" + sAlpha + "¡ã";
+            formatSpec = formatSpec + "x" + sAlpha + "Â°";
             dim->FormatSpec.setValue(formatSpec);
             objFeat->requestPaint();
             cmd->getSelection().clearSelection();
@@ -2000,7 +2000,7 @@ void execCreateVertChamferDimension(Gui::Command* cmd) {
             float alpha = round(abs(atan(dx / dy)) * Pi180);
             std::string sAlpha = std::to_string((int)alpha);
             std::string formatSpec = dim->FormatSpec.getStrValue();
-            formatSpec = formatSpec + "x" + sAlpha + "¡ã";
+            formatSpec = formatSpec + "x" + sAlpha + "Â°";
             dim->FormatSpec.setValue(formatSpec);
             objFeat->requestPaint();
             cmd->getSelection().clearSelection();
@@ -2199,7 +2199,7 @@ void CmdTechDrawExtensionCreateLengthArc::activated(int iMsg) {
             float alpha = acos((radVec1 * radVec2) / (radVec1.Length() * radVec2.Length()));
             float arcLength = alpha * radius / scale;
             dim->Arbitrary.setValue(true);
-            formatSpec << "¡É " << arcLength;
+            formatSpec << "âˆ© " << arcLength;
             dim->FormatSpec.setValue(formatSpec.str());
             objFeat->refreshCEGeoms();
             objFeat->requestPaint();

@@ -99,7 +99,7 @@ void EditModeGeometryCoinConverter::convert(const Sketcher::GeoListFacade & geol
     coinMapping.PointIdToVertexId[0].push_back(-1); // VertexId is the reference used for point selection/preselection
 
     coinMapping.GeoElementId2SetId.emplace( std::piecewise_construct,
-                                            std::forward_as_tuple(Sketcher::GeoElementId::RtPnt),
+                                            std::forward_as_tuple(Sketcher::GeoElementId(Sketcher::GeoEnum::RtPnt, Sketcher::PointPos::start)),
                                             std::forward_as_tuple(pointCounter[0]++, 0));
 
     auto setTracking = [this] (int geoId, int coinLayer, EditModeGeometryCoinConverter::PointsMode pointmode, int numberCurves) {
